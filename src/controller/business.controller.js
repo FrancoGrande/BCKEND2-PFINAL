@@ -1,4 +1,4 @@
-
+import businessModel from '../dao/models/business.model.js';
 
 
 export const getBusinessById = (req, res) => {

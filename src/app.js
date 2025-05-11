@@ -4,6 +4,7 @@ import userRouter from './routes/user.router.js';
 import orderRouter from './routes/order.router.js';
 import businessRouter from './routes/business.router.js';
 import mongoose from 'mongoose';
+import connectDB from './config/db.config.js'; 
 
 const app = express();
 
@@ -12,12 +13,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // database
-mongoose.connect(config.MONGO_URL)
-    .then(() => console.log('Database connected'))
-    .catch((error) => {
-        console.log(error);
-        process.exit();
-    });
+const connection = connectDB(config.MONGO_URL);
 
 // routers
 app.use('/api/users', userRouter);

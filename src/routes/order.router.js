@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import {getOrders, getOrderById, saveOrder, updateOrder, deleteOrder} from '../controller/order.controller.js';
+import {getOrders, getOrderById, saveOrder, resolveOrder, deleteOrder} from '../controller/order.controller.js';
 
 const router = Router();
 
@@ -16,7 +16,7 @@ router.post('/', saveOrder);
 
 
 //actualizar un orden
-router.put('/:oid', updateOrder);
+router.put('/:oid', resolveOrder);
 
 
 //borrar un orden
