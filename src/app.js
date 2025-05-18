@@ -8,7 +8,7 @@ import connectDB from './config/db.config.js';
 
 const app = express();
 
-// config
+// server config
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

@@ -1,11 +1,11 @@
-import businessModel from "./models/business.model";
+import businessModel from "./models/business.model.js";
 
 export default class Business{
 
     getBusiness = async () => {
         try{
-            let business = await businessModel.find();
-            return business;
+            let allBusiness = await businessModel.find();
+            return allBusiness;
         }
         catch(error){
             console.log(error);
@@ -17,6 +17,17 @@ export default class Business{
         try{
             let business = await businessModel.findOne({_id: id});
             return business;
+        }
+        catch(error){
+            console.log(error);
+            return null
+        }
+    }
+
+    createBusiness = async (business) => {
+        try{
+            let businessCreated = await businessModel.create(business);
+            return businessCreated;
         }
         catch(error){
             console.log(error);

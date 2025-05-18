@@ -1,9 +1,9 @@
 export default class UserDTO{
 
-    constructor(userToValidate){
-            this.name= userToValidate.name;
-            this.email = userToValidate.email;
-            this.role = userToValidate ? userToValidate.role : "user_role";
+    constructor(user){
+            this.name= user.name;
+            this.email = user.email;
+            this.role = user.role ? user.role : "user_role";
     }
     
 }

@@ -1,26 +1,33 @@
-import businessModel from '../dao/models/business.model.js';
+import BusinessRepository from "../repositories/business.repository.js";
+
+const businessService = new BusinessRepository();
 
 
-export const getBusinessById = (req, res) => {
-    res.send({status:200,result:'getBusinessById'});
+export const getBusinessById =  async(req, res) => {
+    const {bid} = req.params;
+    let result = businessService.getBusinessById(bid);
+    res.send({status: "success", result});
 }
 
-export const getBusiness = (req, res) => {
-    res.send({status:"success",result:'getBusiness'});
+export const getBusiness = async(req, res) => {
+    let result = await businessService.getBusiness();
+    res.send({status: "success", result});
 }
 
-export const createBusiness = (req, res) => {
-    
+export const createBusiness = async(req, res) => {
+    const user = req.body;
+    res.send({status: "success", result});
 }
 
-export const addproduct = (req, res) => {
-    
+export const addproduct = async(req, res) => {
+    res.send({status: "success", result});
 }
 
-export const updateBusiness = (req, res) => {
-    
+
+export const updateBusiness = async(req, res) => {
+    res.send({status: "success", result});
 }
 
-export const deleteBusiness = (req, res) => {
-    
+export const deleteBusiness = async(req, res) => {
+    res.send({status: "success", result});
 }

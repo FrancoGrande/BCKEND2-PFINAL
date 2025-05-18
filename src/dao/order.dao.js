@@ -4,8 +4,8 @@ export default class Order{
 
     getOrders = async () => {
         try{
-            let order = await orderModel.find();
-            return order;
+            let allOrder = await orderModel.find();
+            return allOrder;
         }
         catch(error){
             console.log(error);

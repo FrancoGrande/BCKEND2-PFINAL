@@ -4,8 +4,8 @@ export default class User{
     
     getUser = async () => {
         try{
-            let user = await userModel.find();
-            return user;
+            let allUsers = await userModel.find();
+            return allUsers;
         }
         catch(error){
             console.log(error);
@@ -37,8 +37,19 @@ export default class User{
 
     updateUser = async (id, user) => {
         try{
-            let userUpdated = await userModel.updeateOne({_id : id}, {$set: user});
+            let userUpdated = await userModel.updateOne({_id : id}, {$set: user});
             return userUpdated;
+        }
+        catch(error){
+            console.log(error);
+            return null
+        }
+    }
+
+    deleteUser = async (id, user) => {
+        try{
+            let userdeleted = await userModel.deleteOne({_id : id}, {$set: user});
+            return userdeleted;
         }
         catch(error){
             console.log(error);

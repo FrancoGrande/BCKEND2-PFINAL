@@ -16,10 +16,10 @@ router.post('/', saveUser);
 
 
 //actualizar un usuario
-router.put('/', updateUser);
+router.put('/:uid', updateUser);
 
 
 //borrar un usuario
-router.delete('/', deleteUser);
+router.delete('/:uid', deleteUser);
 
 export default router;
