@@ -7,8 +7,7 @@ export default class Cart{
 
     getCartById=async (id) =>{
         try{
-            let cart = await cartModel.findOne({_id: id});
-            return cart;
+            return await cartModel.findById(id).populate("products.product")
         }
         catch(error){
             console.log(error);
@@ -18,8 +17,8 @@ export default class Cart{
 
     createCart=async (cart) =>{
         try {
-            let cartCreated = await cartModel.create(cart);
-            return cartCreated
+            let newCart = await cartModel.create({product : []});
+            return newCart;
         } catch (error) {
             console.log(error);
             return null
@@ -41,7 +40,7 @@ export default class Cart{
     addProductToCart=async (cartId,productId, quantity=1) =>{
         try {
             let cart = cartModel.findById(cartId);
-            let product = ProductModel.findById(productId);
+            let product = ProductModel.findById
 
             if(!product){
                 throw new Error("Product not found");

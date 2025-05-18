@@ -3,7 +3,7 @@ import {getCartById, createCart, deleteCart, addProductToCart, deleteProductFrom
 
 const router = Router();
 
-router.get('/', getCartById);
+router.get('/:cid', getCartById);
 
 router.post('/', createCart);
 

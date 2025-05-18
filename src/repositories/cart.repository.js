@@ -1,5 +1,6 @@
 import cartDTO from "../dao/dto/cart.dto.js";
 import cartDao from "../dao/cart.dao.js";
+import CartDTO from "../dao/dto/cart.dto.js";
 
 export default class cartRepository {
 
@@ -8,12 +9,13 @@ export default class cartRepository {
     }
 
     createCart = async (cart) => {
-        const cartToSave = new cartDTO(cart);
-        return await this.dao.createCart(cartToSave);
+        const newCart = await this.dao.createCart();
+        return new CartDTO(newCart);
     }
 
     getCartById = async (id) => {
-        return await this.dao.getCartById(id);
+        const cart = await this.dao.getCartById(id);
+        return new CartDTO(cart);
     }
 
     deleteCart = async (id) => {
