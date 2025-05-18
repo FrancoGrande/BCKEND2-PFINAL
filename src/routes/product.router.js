@@ -16,10 +16,10 @@ router.post('/', createProduct);
 
 
 //actualizar un producto
-router.put('/', updateProduct);
+router.put('/:pid', updateProduct);
 
 
 //borrar un producto
-router.delete('/', deleteProduct);
+router.delete('/:pid', deleteProduct);
 
 export default router;

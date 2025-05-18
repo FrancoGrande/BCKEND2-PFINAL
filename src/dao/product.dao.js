@@ -38,7 +38,7 @@ export default class Product{
 
     updateProduct = async (id, product) => {
         try{
-            let ProductUpdated = await productModel.updeateOne({_id : id}, {$set: product});
+            let ProductUpdated = await productModel.updateOne({_id : id}, {$set: product});
             return ProductUpdated;
         }
         catch(error){
@@ -49,7 +49,7 @@ export default class Product{
 
     deleteProduct = async (id, product) => {
         try{
-            let productdeleted = await productModelModel.deleteOne({_id : id}, {$set: product});
+            let productdeleted = await productModel.deleteOne({_id : id});
             return productdeleted;
         }
         catch(error){
