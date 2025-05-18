@@ -15,19 +15,20 @@ export const getProduct = async(req, res) => {
 }
 
 export const createProduct = async(req, res) => {
-    const user = req.body;
+    const product = req.body;
+    let result = await productService.createProduct(product);
     res.send({status: "success", result});
 }
-
-export const addproduct = async(req, res) => {
-    res.send({status: "success", result});
-}
-
 
 export const updateProduct = async(req, res) => {
+    const {pid} = req.params;
+    const product = req.body;
+    let result = await productService.updateUser(pid,product);
     res.send({status: "success", result});
 }
 
 export const deleteProduct = async(req, res) => {
+    const {pid} = req.params;
+    let result = await productService.deleteProduct(pid);
     res.send({status: "success", result});
 }

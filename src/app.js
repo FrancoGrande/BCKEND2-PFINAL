@@ -18,7 +18,7 @@ const connection = connectDB(config.MONGO_URL);
 // routers
 app.use('/api/users', userRouter);
 app.use('/api/orders', orderRouter);
-app.use('/api/product', productRouter);
+app.use('/api/products', productRouter);
 
 app.use(express.json());
 

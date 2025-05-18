@@ -35,10 +35,11 @@ export default class Product{
         }
     }
 
-    addproduct = async (product) => {
+
+    updateProduct = async (id, product) => {
         try{
-            let ProductCreated = await productModel.create(product);
-            return ProductCreated;
+            let ProductUpdated = await productModel.updeateOne({_id : id}, {$set: product});
+            return ProductUpdated;
         }
         catch(error){
             console.log(error);
@@ -46,10 +47,10 @@ export default class Product{
         }
     }
 
-    updateProduct = async (id, product) => {
+    deleteProduct = async (id, product) => {
         try{
-            let ProductUpdated = await productModel.updeateOne({_id : id}, {$set: product});
-            return ProductUpdated;
+            let productdeleted = await productModelModel.deleteOne({_id : id}, {$set: product});
+            return productdeleted;
         }
         catch(error){
             console.log(error);

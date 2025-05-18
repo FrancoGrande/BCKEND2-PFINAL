@@ -23,15 +23,15 @@ export default class ProductRepository {
         return result;
     }
 
-    addProduct = async (product) => {
-        let productToInsert = new ProductDTO(product);
-        let result = await this.dao.addproduct(productToInsert);
-        return result;
-    }
 
     updateProduct = async (id,product) => {
         let productToUpdate = new ProductDTO(product);
         let result = await this.dao.updateProduct(productToUpdate);
+        return result;
+    }
+
+    deleteProduct = async (id) => {
+        let result = await this.dao.deleteProduct(id);
         return result;
     }
 }
