@@ -2,6 +2,7 @@ import express from 'express';
 import config from './config/config.js';
 import userRouter from './routes/user.router.js';
 import orderRouter from './routes/order.router.js';
+import cartRouter from './routes/cart.router.js';
 import productRouter from './routes/product.router.js';
 import connectDB from './config/db.config.js'; 
 
@@ -18,6 +19,7 @@ const connection = connectDB(config.MONGO_URL);
 app.use('/api/users', userRouter);
 app.use('/api/orders', orderRouter);
 app.use('/api/products', productRouter);
+app.use('/api/cart', cartRouter);
 
 app.use(express.json());
 

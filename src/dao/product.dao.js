@@ -27,6 +27,8 @@ export default class Product{
     createProduct = async (product) => {
         try{
             let ProductCreated = await productModel.create(product);
+
+
             return ProductCreated;
         }
         catch(error){
