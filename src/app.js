@@ -3,7 +3,6 @@ import config from './config/config.js';
 import userRouter from './routes/user.router.js';
 import orderRouter from './routes/order.router.js';
 import productRouter from './routes/product.router.js';
-import mongoose from 'mongoose';
 import connectDB from './config/db.config.js'; 
 
 const app = express();
