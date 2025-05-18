@@ -1,6 +1,5 @@
 import orderRepository from "../repositories/order.repository.js";
 import productModel from "../dao/models/product.model.js";
-import userModel from "../dao/models/user.model.js";
 
 const orderService = new orderRepository();
 
@@ -9,14 +8,26 @@ export const createOrder = async (req, res) => {
 
     try {
         let total = 0;
-        //buscamos el producto por ID y sumamaos el precio 
-        for (let items of products) {
-            const prod = await productModel.findById(items.product);
+
+        // Verificar si el ID de usuario es válido
+        if (!mongoose.Types.ObjectId.isValid(user)) { 
+            return res.status(400).send({ error: "ID de usuario inválido" });
+        }
+
+        for (let item of products) {
+            const prod = await productModel.findById(item.product);
+
             if (!prod) {
-                return res.status(404).send({status: "error", error: "Producto no encontrado."});
+                return res.status(404).send({ error: `Producto no encontrado: ${item.product}` });
+            }
+        
+            if (prod.stock < item.quantity) {
+                return res.status(400).send({
+                error: `No hay suficiente stock de "${prod.nombre}". Stock actual: ${prod.stock}, pedido: ${item.quantity}`
+                });
             }
 
-            total += prod.price * items.quantity;
+            total += prod.precio * item.quantity;
         }
 
         const result= await orderService.createOrder(user,products,total);

@@ -1,5 +1,6 @@
 import ProductRepository from "../repositories/product.repository.js";
 
+
 const productService = new ProductRepository();
 
 
