@@ -19,7 +19,7 @@ const connection = connectDB(config.MONGO_URL);
 app.use('/api/users', userRouter);
 app.use('/api/orders', orderRouter);
 app.use('/api/products', productRouter);
-app.use('/api/cart', cartRouter);
+app.use('/api/carts', cartRouter);
 
 app.use(express.json());
 

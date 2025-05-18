@@ -1,8 +1,8 @@
 export default class OrderDTO{
-    constructor({user,products,total}){
-            this.user = user;
-            this.products = products;
-            this.total = total;
-            this.createdAt = new Date();
+    constructor(order){
+            this.user = order.user;
+            this.cart = order.cart;
+            this.total = total.total;
+            this.createdAt = order.createdAt;
     }
 }

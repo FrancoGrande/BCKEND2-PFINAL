@@ -17,7 +17,7 @@ export default class Cart{
 
     createCart=async (cart) =>{
         try {
-            let newCart = await cartModel.create({product : []});
+            let newCart = await cartModel.create({ products: [] });
             return newCart;
         } catch (error) {
             console.log(error);
@@ -33,43 +33,45 @@ export default class Cart{
             console.log(error);
             return null
         }
-    }
+    }  
 
-     //aca tengo dudas    
-
-    addProductToCart=async (cartId,productId, quantity=1) =>{
-        try {
-            let cart = cartModel.findById(cartId);
-            let product = ProductModel.findById
-
-            if(!product){
+        addProductToCart = async (cartId, productId, quantity = 1) => {
+            try {
+            const product = await ProductModel.findById(productId);
+            if (!product) {
                 throw new Error("Product not found");
             }
-
+        
             if (product.stock < quantity || product.stock === 0) {
                 throw new Error("Not enough stock");
             }
-            
-            if(!cart){
-                return null
+        
+            const cart = await cartModel.findById(cartId);
+            if (!cart) {
+                return null;
             }
-
-            const productIndex = cart.products.findIndex( product => product.product.toString() === productId);
-
+        
+            if (!cart.products) {
+                cart.products = [];
+            }
+        
+            const productIndex = cart.products.findIndex(
+                (p) => p.product.toString() === productId
+            );
+        
             if (productIndex !== -1) {
                 cart.products[productIndex].quantity += quantity;
-            } else { 
+            } else {
                 cart.products.push({ product: productId, quantity });
             }
-
+        
             const updatedCart = await cart.save();
-            return updatedCart
-
-        } catch (error) {
-            console.log(error);
-            return null
-        }
-    }
+            return updatedCart;
+            } catch (error) {
+            console.log("❌ Error al agregar producto al carrito:", error.message);
+            return null;
+            }
+        };
 
     deleteProductFromCart=async (cartId,productId) =>{
         try {

@@ -13,10 +13,9 @@ export default class Order{
         }
     }
 
-    getAllOrders =async () => {
+    getOrders  =async () => {
         try {
-            let allOrders = await orderModel.find();
-            return allOrders
+            return await orderModel.find().populate("user").populate("cart");
         } catch (error) {
             console.log(error);
             return null

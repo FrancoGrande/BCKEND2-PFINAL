@@ -35,7 +35,10 @@ export const deleteCart = async (req, res) => {
 export const addProductToCart = async (req, res) => {
     const {cid, pid} = req.params;
     const { quantity } = req.body;
+    console.log("Controller:", cid, pid, quantity);
+
     let result = await cartService.addProductToCart(cid, pid, quantity ||1);
+    
     res.send({status: "success", result});
 }
 

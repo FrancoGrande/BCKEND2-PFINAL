@@ -6,12 +6,18 @@ export default class orderRepository {
         this.dao =new orderDao();
     }
 
-    createOrder = async (order) => {
-        const orderToSave = new orderDTO(order);
-        return await this.dao.createOrder(orderToSave);
+    createOrder = async (userId, cartId, total) => {
+        const orderData = {
+            user: userId,
+            cart: cartId,
+            total: total
+        };
+        const newOrder = await this.dao.createOrder(orderData);
+        return new orderDTO(newOrder);
     }
 
-    getAllOrders = async () =>{
-        return await this.dao.getAllOrders();
+    getOrders  = async () =>{
+        const orders = await this.dao.getOrders ();
+        return orders.map(order => new orderDTO(order));
     }
 }
