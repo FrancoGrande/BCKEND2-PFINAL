@@ -5,6 +5,9 @@ import orderRouter from './routes/order.router.js';
 import cartRouter from './routes/cart.router.js';
 import productRouter from './routes/product.router.js';
 import connectDB from './config/db.config.js'; 
+import dictionaryRouter from './routes/dictionary.router.js';
+import SessionRouter from './routes/sessions.router.js';
+
 
 const app = express();
 
@@ -20,6 +23,11 @@ app.use('/api/users', userRouter);
 app.use('/api/orders', orderRouter);
 app.use('/api/products', productRouter);
 app.use('/api/carts', cartRouter);
+
+app.use('/api/dictionary', dictionaryRouter);
+app.use('/api/session', (new SessionRouter()).getRouter());
+
+
 
 app.use(express.json());
 
