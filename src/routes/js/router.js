@@ -1,3 +1,4 @@
+import config from '../../config/config.js';
 import { Router as ExpressRouter } from 'express';
 import jwt from 'jsonwebtoken';
 
@@ -58,7 +59,7 @@ export default class Router {
         if(!authHeader) return res.status(401).send({status: "error", message: "Unauthorized"})
 
         const token = authHeader.split(" ")[1];
-        let user = jwt.verify(token, "coderSecret");
+        let user = jwt.verify(token, config.secret_JWT);
 
         if(!policies.includes(user.role.toUpperCase())) return res.status(403).send({error: "No tienes permisos para acceder a esta ruta"});
         req.user = user;

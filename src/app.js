@@ -3,7 +3,7 @@ import config from './config/config.js';
 import userRouter from './routes/user.router.js';
 import orderRouter from './routes/order.router.js';
 import cartRouter from './routes/cart.router.js';
-import productRouter from './routes/product.router.js';
+import ProductRouter from './routes/product.router.js';
 import connectDB from './config/db.config.js'; 
 import dictionaryRouter from './routes/dictionary.router.js';
 import SessionRouter from './routes/sessions.router.js';
@@ -21,7 +21,7 @@ const connection = connectDB(config.MONGO_URL);
 // routers
 app.use('/api/users', userRouter);
 app.use('/api/orders', orderRouter);
-app.use('/api/products', productRouter);
+app.use('/api/products', new ProductRouter().getRouter());
 app.use('/api/carts', cartRouter);
 
 app.use('/api/dictionary', dictionaryRouter);
