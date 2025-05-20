@@ -39,7 +39,7 @@ export default class Cart{
             try {
             const product = await ProductModel.findById(productId);
             if (!product) {
-                throw new Error("Product not found");
+                throw new Error("Producto no encontrado");
             }
         
             if (product.stock < quantity) {
@@ -48,7 +48,7 @@ export default class Cart{
         
             const cart = await cartModel.findById(cartId);
             if (!cart) {
-                throw new Error("Cart not found");
+                throw new Error("Carrito no encontrado");
             }
         
             if (!cart.products) {
@@ -78,7 +78,7 @@ export default class Cart{
             try {
                 const cart = await cartModel.findById(cartId);
                 if (!cart) {
-                    throw new Error("Cart not found");
+                    throw new Error("Carrito no encontrado");
                 }
 
                 const productIndex = cart.products.findIndex(
@@ -86,7 +86,7 @@ export default class Cart{
                 );
 
                 if (productIndex === -1) {
-                    throw new Error("Product not found in cart");
+                    throw new Error("Producto no encontrado en el carrito");
                 }if (cart.products[productIndex].quantity > quantity) {
                     cart.products[productIndex].quantity -= quantity;
                 } else {
