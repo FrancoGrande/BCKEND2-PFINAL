@@ -26,8 +26,13 @@ export const createCart = async (req, res) => {
 
 export const deleteCart = async (req, res) => {
     const {cid} = req.params;
-    let result = await cartService.deleteCart(cid);
-    res.send({status: "success", result});
+    try{
+        let result = await cartService.deleteCart(cid);
+        res.send({status: "success", result});
+    }catch (error) {
+        res.status(400).send({status: "error", message: "error al eliminar carrito", error});
+    }
+
 }
 
 

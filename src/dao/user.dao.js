@@ -9,7 +9,7 @@ export default class User{
         }
         catch(error){
             console.log(error);
-            return null
+            throw error
         }
     }
 
@@ -20,7 +20,7 @@ export default class User{
         }
         catch(error){
             console.log(error);
-            return null
+            throw error
         }
     }
 
@@ -31,7 +31,7 @@ export default class User{
         }
         catch(error){
             console.log(error);
-            return null
+            throw error
         }
     }
 
@@ -42,7 +42,7 @@ export default class User{
         }
         catch(error){
             console.log(error);
-            return null
+            throw error
         }
     }
 
@@ -53,7 +53,7 @@ export default class User{
         }
         catch(error){
             console.log(error);
-            return null
+            throw error
         }
     }
 }

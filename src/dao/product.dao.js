@@ -9,7 +9,7 @@ export default class Product{
         }
         catch(error){
             console.log(error);
-            return null
+            throw error
         }
     }
 
@@ -20,7 +20,7 @@ export default class Product{
         }
         catch(error){
             console.log(error);
-            return null
+            throw error
         }
     }
 
@@ -33,7 +33,7 @@ export default class Product{
         }
         catch(error){
             console.log(error);
-            return null
+            throw error
         }
     }
 
@@ -45,18 +45,18 @@ export default class Product{
         }
         catch(error){
             console.log(error);
-            return null
+            throw error
         }
     }
 
-    deleteProduct = async (id, product) => {
+    deleteProduct = async (id) => {
         try{
             let productdeleted = await productModel.deleteOne({_id : id});
             return productdeleted;
         }
         catch(error){
             console.log(error);
-            return null
+            throw error
         }
     }
 }
