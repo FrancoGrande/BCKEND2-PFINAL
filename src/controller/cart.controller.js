@@ -36,16 +36,26 @@ export const addProductToCart = async (req, res) => {
     const {cid, pid} = req.params;
     const { quantity } = req.body;
     console.log("Controller:", cid, pid, quantity);
+    try {
+        let result = await cartService.addProductToCart(cid, pid, quantity || 1);
+        res.send({ status: "success", result });
+    } catch (error) {
+        console.error(error);
+        res.status(400).send({ status: "error", message: error.message });
+    }
 
-    let result = await cartService.addProductToCart(cid, pid, quantity ||1);
-    
-    res.send({status: "success", result});
 }
 
 export const deleteProductFromCart = async (req, res) => {
     const {cid, pid} = req.params;
-    let result = await cartService.deleteProductFromCart(cid, pid);
-    res.send({status: "success", result});
+    const { quantity =1 } = req.body || {};
+    try {
+        let result = await cartService.deleteProductFromCart(cid, pid, quantity || 1);
+        res.send({status: "success", result});
+    } catch (error) {
+        res.status(400).send({status: "error", message: error.message});
+    }
+
 }
 
 

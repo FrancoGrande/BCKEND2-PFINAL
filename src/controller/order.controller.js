@@ -40,7 +40,16 @@ export const createOrder = async (req, res) => {
     }
 }
 
-export const getOrders = async (req, res) => {
-    const result = await orderService.getOrders();
-    res.send({ status: "success", result });
+export const getOrderById = async (req, res) => {
+    const {oid} = req.params;
+    try {
+        const result = await orderService.getOrderById(oid);
+        if (!result) {
+            return res.status(404).send({ status: "error", error: "Pedido no encontrado" });
+        }
+        res.send({ status: "success", result });
+    } catch (error) {
+        res.status(500).send({ status: "error", error: error.message });
+    }
+
 };

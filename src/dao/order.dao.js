@@ -13,12 +13,12 @@ export default class Order{
         }
     }
 
-    getOrders  =async () => {
+    getOrderById  =async (id) => {
         try {
-            return await orderModel.find().populate("user").populate("cart");
+            return await orderModel.findById(id).populate("user").populate("cart");
         } catch (error) {
             console.log(error);
-            return null
+            throw error;
         }
     }
 }

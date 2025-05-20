@@ -16,8 +16,8 @@ export default class orderRepository {
         return new orderDTO(newOrder);
     }
 
-    getOrders  = async () =>{
-        const orders = await this.dao.getOrders ();
-        return orders.map(order => new orderDTO(order));
+    getOrderById  = async (id) =>{
+        const order = await this.dao.getOrderById (id);
+        return new orderDTO(order);
     }
 }

@@ -1,10 +1,10 @@
 import {Router} from 'express';
-import {getOrders, createOrder} from '../controller/order.controller.js';
+import {getOrderById, createOrder} from '../controller/order.controller.js';
 
 const router = Router();
 
 //obtener ordenes
-router.get('/', getOrders);
+router.get('/:oid', getOrderById);
 
 
 //crear orden

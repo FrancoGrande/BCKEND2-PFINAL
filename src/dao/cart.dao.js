@@ -31,7 +31,7 @@ export default class Cart{
             return cartDeleted
         } catch (error) {
             console.log(error);
-            return null
+            return error
         }
     }  
 
@@ -42,13 +42,13 @@ export default class Cart{
                 throw new Error("Product not found");
             }
         
-            if (product.stock < quantity || product.stock === 0) {
-                throw new Error("Not enough stock");
+            if (product.stock < quantity) {
+                throw new Error("Sin stock");
             }
         
             const cart = await cartModel.findById(cartId);
             if (!cart) {
-                return null;
+                throw new Error("Cart not found");
             }
         
             if (!cart.products) {
@@ -64,26 +64,42 @@ export default class Cart{
             } else {
                 cart.products.push({ product: productId, quantity });
             }
-        
+            product.stock -= quantity;
+            await product.save();
             const updatedCart = await cart.save();
             return updatedCart;
             } catch (error) {
-            console.log("❌ Error al agregar producto al carrito:", error.message);
-            return null;
+            console.log(" Error al agregar producto al carrito:", error.message);
+            throw error;
             }
         };
 
-    deleteProductFromCart=async (cartId,productId) =>{
-        try {
-            const cartUpdated = await cartModel.updateOne(
-                { _id: cartId },
-                { $pull: { products: { product: productId } } }
-            );         
-            return cartUpdated
-        } catch (error) {
-            console.log(error);
-            return null
-        }
+        deleteProductFromCart=async (cartId,productId, quantity=1) =>{
+            try {
+                const cart = await cartModel.findById(cartId);
+                if (!cart) {
+                    throw new Error("Cart not found");
+                }
+
+                const productIndex = cart.products.findIndex(
+                    (p) => p.product.toString() === productId
+                );
+
+                if (productIndex === -1) {
+                    throw new Error("Product not found in cart");
+                }if (cart.products[productIndex].quantity > quantity) {
+                    cart.products[productIndex].quantity -= quantity;
+                } else {
+                    cart.products.splice(productIndex, 1);
+                }
+
+                const updatedCart = await cart.save();
+                return updatedCart;
+            } catch (error) {
+                console.log(" Error al eliminar producto del carrito:", error.message);
+                throw error;
+            }
+        };
     }
 
-}
+

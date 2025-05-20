@@ -23,11 +23,20 @@ export default class cartRepository {
     }
 
     addProductToCart    = async (cid, pid, quantity) => {
-        return await this.dao.addProductToCart(cid, pid, quantity);
+        try {
+            return await this.dao.addProductToCart(cid, pid, quantity);
+            
+        } catch (error) {
+            throw error;
+        }
     }
 
-    deleteProductFromCart = async (cid, pid) => {
-        return await cartDao.deleteProductFromCart(cartId, productId);
+    deleteProductFromCart = async (cid, pid, quantity) => {
+        try {
+            return await this.dao.deleteProductFromCart(cid, pid, quantity);
+            
+        } catch (error) {
+            throw error;
+        }
     }
-
 }
