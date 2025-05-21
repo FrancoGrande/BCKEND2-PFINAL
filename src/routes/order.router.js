@@ -1,14 +1,19 @@
-import {Router} from 'express';
+import Router from './js/router.js';
 import {getOrderById, createOrder} from '../controller/order.controller.js';
 
-const router = Router();
+export default class orderRouter extends Router {
+    init(){
 
-//obtener ordenes
-router.get('/:oid', getOrderById);
-
-
-//crear orden
-router.post('/', createOrder);
+        //obtener ordenes
+        this.get('/:oid',["ADMIN"], getOrderById);
 
 
-export default router;
+        //crear orden
+        this.post('/',["ADMIN"], createOrder);
+
+    }   
+}
+
+
+
+

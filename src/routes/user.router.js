@@ -1,26 +1,29 @@
-import {Router} from 'express';
+
 import {getUsers, getUserById, saveUser, updateUser, deleteUser} from '../controller/user.controller.js';
-
-const router = Router();
-
-//obtener ususarios
-router.get('/', getUsers);
+import Router from './js/router.js';
 
 
-//obtener un usuario
-router.get('/:uid', getUserById);
 
+export default class userRouter extends Router {
 
-//crear un usuario
-router.post('/', saveUser);
+    init() {
 
+    //obtener ususarios
+    this.get('/',["ADMIN"],  getUsers); // solo admin para que no publicar información sensible
 
-//actualizar un usuario
-router.put('/:uid', updateUser);
+    //obtener un usuario
+    this.get('/:uid',["ADMIN"], getUserById); // solo admin para que no publicar información sensible
 
+    //crear un usuario
+    this.post('/',["PUBLIC"], saveUser);
 
-//borrar un usuario
-router.delete('/:uid', deleteUser);
+    //actualizar un usuario
+    this.put('/:uid',["PUBLIC"], updateUser);
 
-export default router;
+    //borrar un usuario
+    this.delete('/:uid',["ADMIN"], deleteUser); 
+    }
+
+}
+
 

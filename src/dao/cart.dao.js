@@ -69,7 +69,7 @@ export default class Cart{
         }
     };
 
-    deleteProductFromCart=async (cartId,productId, quantity=1) =>{
+    deleteProductFromCart = async (cartId,productId, quantity=1) =>{
         try {
             const cart = await cartModel.findById(cartId);
             if (!cart) {

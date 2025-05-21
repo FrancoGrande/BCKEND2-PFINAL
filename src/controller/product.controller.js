@@ -8,9 +8,14 @@ export const getProductById =  async(req, res) => {
     const {pid} = req.params;
     try{
         let result =  await productService.getProductById(pid);
+
+        if (!result) {
+            return res.status(404).send({ status: "error", message: "Producto no encontrado" });
+        }
         res.send({status: "success", result});
     } catch (error) {
-        res.status(400).send({status: "error", message: "error al obtener producto", error});
+        console.error("Error al obtener producto por ID:", error);
+        res.status(500).send({ status: "error", message: "Error interno del servidor" });
     }
 
 }
@@ -18,9 +23,14 @@ export const getProductById =  async(req, res) => {
 export const getProduct = async(req, res) => {
     try{
         let result = await productService.getProduct();
+
+        if (!result) {
+            return res.status(404).send({ status: "error", message: "Productos no encontrados" });
+        }
+
         res.send({status: "success", result});
     } catch (error) {
-        res.status(400).send({status: "error", message: "error lista de productos", error});
+        res.status(500).send({ status: "error", message: "Error interno del servidor" });
     }
 }
 
@@ -32,11 +42,15 @@ export const createProduct = async(req, res) => {
         }
         
         let result = await productService.createProduct(product);
+
+        if (!result) {
+            return res.status(404).send({ status: "error", message: "Error al crear producto" });
+        }
+
         res.send({status: "success", result});
     } catch (error) {
-        res.status(400).send({status: "error", message: "error al crear producto", error});
+        res.status(500).send({ status: "error", message: "Error interno del servidor" });
     }
-
 }
 
 export const updateProduct = async(req, res) => {
@@ -48,9 +62,14 @@ export const updateProduct = async(req, res) => {
         }
     
         let result = await productService.updateProduct(pid, product);
+
+        if (!result) {
+            return res.status(404).send({ status: "error", message: "Error al actualizar producto" });
+        }
+
         res.send({status: "success", result});
     } catch (error) {
-        res.status(400).send({status: "error", message: "error al actualizar producto", error});
+        res.status(500).send({ status: "error", message: "Error interno del servidor" });
     }
 
 }
@@ -59,9 +78,14 @@ export const deleteProduct = async(req, res) => {
     const {pid} = req.params;
     try{
         let result = await productService.deleteProduct(pid);
+
+        if (!result) {
+            return res.status(404).send({ status: "error", message: "Error al eliminar producto" });
+        }
+
         res.send({status: "success", result});
     } catch (error) {
-        res.status(400).send({status: "error", message: "error al eliminar producto", error});
+        res.status(500).send({ status: "error", message: "Error interno del servidor" });
     }
 
 }

@@ -1,16 +1,19 @@
-import {Router} from 'express';
+import Router from './js/router.js';
 import {getCartById, createCart, deleteCart, addProductToCart, deleteProductFromCart} from '../controller/cart.controller.js';
 
-const router = Router();
 
-router.get('/:cid', getCartById);
+export default class cartRouter extends Router {
+    init(){
 
-router.post('/', createCart);
+        this.get('/:cid',["PUBLIC"], getCartById);
 
-router.delete('/:cid', deleteCart);
+        this.post('/',["ADMIN"], createCart);
+        
+        this.delete('/:cid',["PUBLIC"], deleteCart);
+        
+        this.post('/:cid/product/:pid',["PUBLIC"], addProductToCart);
+        
+        this.delete('/:cid/product/:pid',["PUBLIC"], deleteProductFromCart);
 
-router.post('/:cid/product/:pid', addProductToCart);
-
-router.delete('/:cid/product/:pid', deleteProductFromCart);
-
-export default router;
+    }   
+}
