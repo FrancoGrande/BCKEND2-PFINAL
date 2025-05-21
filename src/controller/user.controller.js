@@ -72,6 +72,7 @@ export const deleteUser = async (req, res) => {
 
         res.send({status: "success", result});
     } catch (error) {
+
         res.status(500).send({ status: "error", message: "Error interno del servidor" });
     }
     

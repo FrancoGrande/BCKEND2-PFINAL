@@ -46,9 +46,9 @@ export default class User{
         }
     }
 
-    deleteUser = async (id, user) => {
+    deleteUser = async (id) => {
         try{
-            let userdeleted = await userModel.deleteOne({_id : id}, {$set: user});
+            let userdeleted = await userModel.deleteOne({_id : id});
             return userdeleted;
         }
         catch(error){

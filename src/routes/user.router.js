@@ -9,10 +9,10 @@ export default class userRouter extends Router {
     init() {
 
     //obtener ususarios
-    this.get('/',["ADMIN"],  getUsers); // solo admin para que no publicar información sensible
+    this.get('/',["PUBLIC"],  getUsers);
 
     //obtener un usuario
-    this.get('/:uid',["ADMIN"], getUserById); // solo admin para que no publicar información sensible
+    this.get('/:uid',["PUBLIC"], getUserById);
 
     //crear un usuario
     this.post('/',["PUBLIC"], saveUser);
